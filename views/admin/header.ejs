@@ -12,35 +12,43 @@
   	<link href="/admin/css/simple-line-icons.min.css" rel="stylesheet">
   	<link href="/admin/css/style.css" rel="stylesheet">
 </head>
-<body class="app flex-row align-items-center">
-	<div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-5">
-        <div class="card-group">
-          <div class="card p-4">
-            <div class="card-body">
-              <h1>Login</h1>
-              <p class="text-muted">Sign In to your account</p>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="icon-user"></i></span>
-                </div>
-                <input type="text" class="form-control" placeholder="Username">
-              </div>
-              <div class="input-group mb-4">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="icon-lock"></i></span>
-                </div>
-                <input type="password" class="form-control" placeholder="Password">
-              </div>
-              <div class="row">
-                <div class="col-6">
-                  <button type="button" class="btn btn-primary px-4">Login</button>
-                </div>
-              </div>
-            </div>
+<body <% if(page == 'login'){ %> class="app flex-row align-items-center" <% } else { %> class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden" <% } %>  >
+
+<% if(page != 'login'){ %>
+
+<header class="app-header navbar">
+    <button class="navbar-toggler mobile-sidebar-toggler d-lg-none" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#"></a>
+    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <ul class="nav navbar-nav d-md-down-none mr-auto">
+
+      <li class="nav-item px-3">
+        <a class="nav-link" href="/admin/dashboard">Dashboard</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav ml-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+        	<% if(user){ %>
+        		<%= user.name %>
+        	<% } %>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
+          <div class="dropdown-header text-center">
+            <strong>Account</strong>
           </div>
+          <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
+          <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Settings</a>
+          <div class="divider"></div>
+          <a class="dropdown-item" href="/admin/logout"><i class="fa fa-lock"></i> Logout</a>
         </div>
-      </div>
-    </div>
-  </div>
+      </li>
+
+    </ul>
+  </header>
+
+<% } %>

@@ -1,9 +1,30 @@
 const express = require('express');
 const router = express.Router();
+const admin = require('../controllers/adminUserController');
 
+const adminUser = new admin();
+
+// get requests
 router.get('/',(req,res)=>{
-	res.render('admin/login');
+	let opt = {
+		page: 'login'
+	};
+	res.render('admin/login',opt);
 });
+
+router.get('/dashboard',adminUser.checkAuth,(req,res)=>{
+	let opt = {
+		page: 'dashboard',
+		user: req.user
+	};
+	res.render('admin/dashboard',opt);
+});
+
+router.get('/logout',adminUser.logOut);
+
+// post requests
+router.post('/login',adminUser.login);
+
 
 
 module.exports = router;
