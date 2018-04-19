@@ -20,6 +20,16 @@ router.get('/dashboard',adminUser.checkAuth,(req,res)=>{
 	res.render('admin/dashboard',opt);
 });
 
+router.get('/categories',adminUser.checkAuth,(req,res)=>{
+	res.send('hi')
+});
+
+router.get('/addcategorie',adminUser.checkAuth,(req,res)=>{
+	res.send('hello');
+});
+
+
+
 router.get('/logout',adminUser.logOut);
 
 // post requests
