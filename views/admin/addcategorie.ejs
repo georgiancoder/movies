@@ -1,5 +1,34 @@
 <%- include('./header') %>
-
-
+<div class="container-fluid">
+	<h4>ADD CATEGORIE</h4>
+	<div class="card">
+		<form>
+			<div class="card-header">
+				<strong>categorie add form</strong>
+			</div>
+			<div class="card-body">
+					<div class="row">
+						<div class="col-sm-5">
+							<div class="form-group">
+								<label for="title">Categorie Title:</label>
+								<input type="text" class="form-control" name="title" id="title" placeholder="add categorie title" required>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-group">
+								<label for="order">Categorie Order:</label>
+								<input type="number" class="form-control" name="order" id="order" value="0">
+							</div>
+						</div>
+					</div>
+				
+			</div>
+			<div class="card-footer">
+				<button type="submit" class="btn btn-sm btn-primary">Add Categorie</button>
+				<button type="reset" class="btn btn-sm btn-danger">Clear Data</button>
+			</div>
+		</form>
+	</div>
+</div>
 
 <%- include('./footer') %>
