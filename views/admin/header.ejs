@@ -12,9 +12,9 @@
   	<link href="/admin/css/simple-line-icons.min.css" rel="stylesheet">
   	<link href="/admin/css/style.css" rel="stylesheet">
 </head>
-<body <% if(page == 'login'){ %> class="app flex-row align-items-center" <% } else { %> class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden" <% } %>  >
+<body <% if(page && page == 'login'){ %> class="app flex-row align-items-center" <% } else { %> class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden" <% } %>  >
 
-<% if(page != 'login'){ %>
+<% if(page && page != 'login'){ %>
 
 <header class="app-header navbar">
     <button class="navbar-toggler mobile-sidebar-toggler d-lg-none" type="button">
@@ -101,4 +101,6 @@
 	      </nav>
 	      <button class="sidebar-minimizer brand-minimizer" type="button"></button>
 	    </div>
+	    <!-- Main content -->
+    	<main class="main">
 <% } %>
