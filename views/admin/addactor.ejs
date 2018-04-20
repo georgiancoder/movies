@@ -3,7 +3,7 @@
 <div class="container-fluid">
 	<h4>ADD ACTOR</h4>
 	<div class="card">
-		<form>
+		<form action="/admin/addactor" method="post" enctype="multipart/form-data">
 			<div class="card-header">
 				<strong>Add Actor form</strong>
 			</div>
@@ -34,7 +34,7 @@
 				<button type="reset" class="btn btn-sm btn-danger">Clear Data</button>
 			</div>
 		</form>
-	</div>	
+	</div>
 </div>
 
 <%- include('./footer') %>

@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const admin = require('../controllers/adminUserController');
+const categorie = require('../controllers/categorieController');
 
 const adminUser = new admin();
+const Categorie = new categorie();
 
 // get requests
 router.get('/',(req,res)=>{
@@ -25,7 +27,15 @@ router.get('/categories',adminUser.checkAuth,(req,res)=>{
 		page: 'categories',
 		user: req.user
 	};
-	res.render('admin/categories',opt);
+	Categorie.getCategories((err,data)=>{
+		if(err){
+			console.log(err);
+		}else{
+			opt.categories = data;
+			res.render('admin/categories',opt);
+		}
+	});
+
 });
 
 router.get('/addcategorie',adminUser.checkAuth,(req,res)=>{
@@ -89,6 +99,15 @@ router.get('/logout',adminUser.logOut);
 
 // post requests
 router.post('/login',adminUser.login);
+router.post('/addcategorie',adminUser.checkAuth,Categorie.addCategorie);
+
+router.post('/adddirector',adminUser.checkAuth,(req,res)=>{
+	res.send('add director');
+});
+
+router.post('/addactor',adminUser.checkAuth,(req,res)=>{
+	res.send('add actor');
+});
 
 
 

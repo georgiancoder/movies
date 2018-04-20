@@ -9,7 +9,7 @@ module.exports = mongoose.model('categories',categorieSchema);
 
 module.exports.getCategories = function(cb){
 	let categorie = this;
-	categorie.find(cb);
+	categorie.find(cb).sort('order');
 }
 
 module.exports.addNewCategorie = function(data,cb){
