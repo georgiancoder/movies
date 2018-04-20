@@ -1,5 +1,40 @@
 <%- include('./header') %>
 
-<h4>ADD ACTORS</h4>
+<div class="container-fluid">
+	<h4>ADD ACTOR</h4>
+	<div class="card">
+		<form>
+			<div class="card-header">
+				<strong>Add Actor form</strong>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="name">Name:</label>
+							<input type="text" name="name" id="name" class="form-control" placeholder="Input Actor Name" required>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="lastname">Last Name:</label>
+							<input type="text" name="lastname" id="lastname" class="form-control" placeholder="Input Actor Last Name" required>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="avatar">Avatar:</label>
+							<input type="file" name="avatar" class="form-control-file" id="avatar">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-footer">
+				<button type="submit" class="btn btn-sm btn-primary">Add Actor</button>
+				<button type="reset" class="btn btn-sm btn-danger">Clear Data</button>
+			</div>
+		</form>
+	</div>	
+</div>
 
 <%- include('./footer') %>
