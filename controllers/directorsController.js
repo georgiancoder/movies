@@ -7,6 +7,7 @@ const fs = require('fs');
 
 class directorsController {
     addDirector(req, res) {
+        
         let dir = './public/uploads/directors';
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir);
@@ -20,7 +21,6 @@ class directorsController {
             }
         });
         const errorFormatter = ({ location, msg, param, value, nestedErrors }) => {
-            // Build your resulting errors however you want! String, object, whatever - it works!
             return `${location}[${param}]: ${msg}`;
         };
 
