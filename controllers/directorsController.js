@@ -7,6 +7,7 @@ const fs = require('fs');
 
 class directorsController {
     addDirector(req, res) {
+        // add director
         let dir = './public/uploads/directors';
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir);
