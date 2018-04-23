@@ -2,14 +2,18 @@ const directors = require('../models/directors');
 var multer = require('multer');
 const { check, validationResult } = require('express-validator/check');
 const path = require('path');
+const fs = require('fs');
 
 
 class directorsController {
     addDirector(req, res) {
-
+        let dir = './public/uploads/directors';
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir);
+        }
         let storage = multer.diskStorage({
             destination: function(req, file, callback) {
-                callback(null, './public/uploads/directors');
+                callback(null, dir);
             },
             filename: function(req, file, callback) {
                 callback(null, file.fieldname + '-' + Date.now() + file.originalname);
@@ -38,25 +42,25 @@ class directorsController {
             } else {
                 if (req.file) {
                     req.body.avatar = '/uploads/directors/' + req.file.filename;
-                }else{
-                	req.body.avatar = '';
+                } else {
+                    req.body.avatar = '';
                 }
 
                 req.checkBody('name', 'name required').notEmpty();
                 req.checkBody('lastname', 'lastname required').notEmpty();
                 req.checkBody('url', 'url must be specified').notEmpty();
-            	const result = validationResult(req).formatWith(errorFormatter);
-            	if (!result.isEmpty()) {
-				    // { errors: [ "body[password]: must be at least 10 chars long" ] }
-				    return res.json({ errors: result.array() });
-				  }
-				  else{
-				  	directors.addDirector(req.body,(err, data)=>{
-				  		res.redirect('/admin/adddirector');
-				  	});
-				  }
+                const result = validationResult(req).formatWith(errorFormatter);
+                if (!result.isEmpty()) {
+                    // { errors: [ "body[password]: must be at least 10 chars long" ] }
+                    return res.json({ errors: result.array() });
+                } else {
+                    directors.addDirector(req.body, (err, data) => {
+                        res.redirect('/admin/adddirector');
+                    });
+                }
             }
         });
+
     }
 }
 
