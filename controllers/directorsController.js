@@ -7,8 +7,6 @@ const fs = require('fs');
 
 class directorsController {
     addDirector(req, res) {
-        console.log('--------------------------------------------');
-        console.log('create director');
         let dir = './public/uploads/directors';
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir);
@@ -40,7 +38,6 @@ class directorsController {
 
         upload(req, res, (err) => {
             if (err) {
-                console.log('shemovida');
                 res.json(err);
             } else {
                 if (req.file) {
@@ -55,7 +52,6 @@ class directorsController {
                 const result = validationResult(req).formatWith(errorFormatter);
                 if (!result.isEmpty()) {
                     // { errors: [ "body[password]: must be at least 10 chars long" ] }
-                    console.log('aqari');
                     return res.json({ errors: result.array() });
                 } else {
                     directors.addDirector(req.body, (err, data) => {
