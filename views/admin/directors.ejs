@@ -1,5 +1,24 @@
 <%- include('./header') %>
 
-<h4>DIRECTORS</h4>
+<div class="container-fluid">
+	<h4>DIRECTORS</h4>
+	<table class="table table-striped">
+		<tr>
+			<th>Image:</th>
+			<th>Fullname:</th>
+			<th>More Info:</th>
+			<th>Action:</th>
+		</tr>
+		<% directors.forEach(function(director){ %>
+			<tr>
+				<td><img src="<%= director.avatar %>"></td>
+				<td><%= director.name + '  ' + director.lastName %></td>
+				<td><%= director.moreInfo %></td>
+				<td><a href="/admin/editdirector/<%= director._id %>" class="btn btn-sm btn-success" role="button"><i class="fa fa-edit"></i>Edit</a> <a href="/admin/deldirector/<%= director._id %>" class="btn btn-sm btn-danger" role="button"><i class="fa fa-remove"></i>Delete</a></td>
+			</tr>	
+		<% }) %>
+	</table>
+	
+</div>
 
 <%- include('./footer') %>

@@ -20,3 +20,8 @@ module.exports.addDirector = function(data, cb){
 
 	newDirector.save(cb);
 }
+
+module.exports.getDirectors = function(cb){
+	let director = this;
+	director.find(cb);
+}

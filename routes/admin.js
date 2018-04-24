@@ -69,7 +69,14 @@ router.get('/directors', adminUser.checkAuth, (req, res) => {
         page: 'directors',
         user: req.user
     };
-    res.render('admin/directors', opt);
+    Directors.getDirectors((err,data)=>{
+        if(err){
+            console.log(err);
+        }else{
+            opt.directors = data;
+            res.render('admin/directors', opt); 
+        }
+    });
 });
 
 router.get('/adddirector', adminUser.checkAuth, (req, res) => {
