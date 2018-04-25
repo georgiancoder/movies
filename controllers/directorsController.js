@@ -64,6 +64,10 @@ class directorsController {
     getDirectors(cb){
         directors.getDirectors(cb);
     }
+
+    getDirectorById(id,cb){
+        directors.getDirectorById(id,cb);
+    }
 }
 
 module.exports = directorsController;

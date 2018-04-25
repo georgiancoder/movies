@@ -87,6 +87,23 @@ router.get('/adddirector', adminUser.checkAuth, (req, res) => {
     res.render('admin/adddirector', opt);
 });
 
+router.get('/editdirector/:id',adminUser.checkAuth,(req,res)=>{
+    let opt = {
+        page: 'editdirector',
+        user: req.user
+    };
+    let id = req.params.id ? req.params.id : null;
+    Directors.getDirectorById(id,(err, data) => {
+        if(err){
+            console.log(err);
+        }else{
+            opt.director = data;
+            res.render('admin/adddirector', opt);   
+        }
+    });
+    
+})
+
 router.get('/actors', adminUser.checkAuth, (req, res) => {
     let opt = {
         page: 'actors',

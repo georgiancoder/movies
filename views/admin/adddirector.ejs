@@ -1,47 +1,93 @@
 <%- include('./header') %>
 
 <div class="container-fluid">
-	<h4>ADD DIRECTOR</h4>
+	<h4><% if(page && page =='adddirector'){ %> ADD DIRECTOR <% } else if(page && page == 'editdirector') { %> EDIT DIRECTOR <% } %></h4>
 	<div class="card">
-		<form action="/admin/adddirector" method="post" enctype="multipart/form-data">
-			<div class="card-header">
-				<strong>add director form</strong>
-			</div>
-			<div class="card-body">
-				<div class="row">
-					<div class="col-sm-4">
-						<div class="form-group">
-							<label id="name">Name:</label>
-							<input type="text" class="form-control" name="name" id="name" placeholder="Input Director Name" required>
+		<% if(page && page =='adddirector'){ %>
+			<form action="/admin/adddirector" method="post" enctype="multipart/form-data">
+				<div class="card-header">
+					<strong>add director form</strong>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label id="name">Name:</label>
+								<input type="text" class="form-control" name="name" id="name" placeholder="Input Director Name" required>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label for="lastname">Last Name:</label>
+								<input type="text" name="lastname" id="lastname" class="form-control" placeholder="Input Director Last name" required>
+							</div>
 						</div>
 					</div>
-					<div class="col-sm-4">
-						<div class="form-group">
-							<label for="lastname">Last Name:</label>
-							<input type="text" name="lastname" id="lastname" class="form-control" placeholder="Input Director Last name" required>
+					<div class="row">
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label id="url">More Info:</label>
+								<input type="url" name="url" id="url" class="form-control" placeholder="http://directorwikki.com" required>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label for="avatar">Avatar:</label>
+								<input type="file" class="form-control-file" name="avatar" id="avatar">
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-sm-4">
-						<div class="form-group">
-							<label id="url">More Info:</label>
-							<input type="url" name="url" id="url" class="form-control" placeholder="http://directorwikki.com" required>
+				<div class="card-footer">
+					<button type="submit" class="btn btn-sm btn-primary">Add Director</button>
+					<button type="reset" class="btn btn-sm btn-danger">Clear Data</button>
+				</div>
+			</form>
+		<% } else if(page && page == 'editdirector') { %>
+			<form action="/admin/editdirector" method="post" enctype="multipart/form-data">
+				<div class="card-header">
+					<strong><%= director.name.toUpperCase() %> <%= director.lastName.toUpperCase() %></strong>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label id="name">Name:</label>
+								<input type="text" class="form-control" name="name" value="<%= director.name %>" id="name" placeholder="Input Director Name" required>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label for="lastname">Last Name:</label>
+								<input type="text" name="lastname" id="lastname" value="<%= director.lastName %>" class="form-control" placeholder="Input Director Last name" required>
+							</div>
 						</div>
 					</div>
-					<div class="col-sm-4">
-						<div class="form-group">
-							<label for="avatar">Avatar:</label>
-							<input type="file" class="form-control-file" name="avatar" id="avatar">
+					<div class="row">
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label id="url">More Info:</label>
+								<input type="url" name="url" id="url" class="form-control" value="<%= director.moreInfo %>" placeholder="http://directorwikki.com" required>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+							<% if(director.avatar && director.avatar.length > 0) { %>
+								<img src="<%= director.avatar %>">
+							<% } else { %>
+								<label for="avatar">Avatar:</label>
+								<input type="file" class="form-control-file" name="avatar" id="avatar">
+							<% } %>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="card-footer">
-				<button type="submit" class="btn btn-sm btn-primary">Add Director</button>
-				<button type="reset" class="btn btn-sm btn-danger">Clear Data</button>
-			</div>
-		</form>
+				<div class="card-footer">
+					<button type="submit" class="btn btn-sm btn-primary">Add Director</button>
+					<button type="reset" class="btn btn-sm btn-danger">Clear Data</button>
+				</div>
+			</form>
+		<% } %>
 	</div>
 </div>
 

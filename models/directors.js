@@ -25,3 +25,8 @@ module.exports.getDirectors = function(cb){
 	let director = this;
 	director.find(cb);
 }
+
+module.exports.getDirectorById = function(id,cb){
+	let director = this;
+	director.findById(id,cb);
+}
