@@ -73,7 +73,8 @@
 						<div class="col-sm-4">
 							<div class="form-group">
 							<% if(director.avatar && director.avatar.length > 0) { %>
-								<img src="<%= director.avatar %>">
+								<img src="<%= director.avatar %>" style="width: 80px; height: 80px; object-fit: cover;">
+								<a>delete avatar</a>
 							<% } else { %>
 								<label for="avatar">Avatar:</label>
 								<input type="file" class="form-control-file" name="avatar" id="avatar">
