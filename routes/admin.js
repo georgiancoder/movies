@@ -3,10 +3,12 @@ const router = express.Router();
 const admin = require('../controllers/adminUserController');
 const categorie = require('../controllers/categorieController');
 const directos = require('../controllers/directorsController');
+const actors = require('../controllers/actorController');
 
 const adminUser = new admin();
 const Categorie = new categorie();
 const Directors = new directos();
+const Actors = new actors();
 
 // get requests
 router.get('/', (req, res) => {
@@ -109,7 +111,15 @@ router.get('/actors', adminUser.checkAuth, (req, res) => {
         page: 'actors',
         user: req.user
     };
-    res.render('admin/actors', opt);
+    Actors.getActors((err,data)=>{
+      if(err){
+        console.log(err);
+      }else{
+        opt.actors = data;
+        res.render('admin/actors', opt);
+      }
+    });
+
 });
 
 router.get('/addactor', adminUser.checkAuth, (req, res) => {
@@ -129,9 +139,7 @@ router.post('/addcategorie', adminUser.checkAuth, Categorie.addCategorie);
 
 router.post('/adddirector', adminUser.checkAuth, Directors.addDirector);
 
-router.post('/addactor', adminUser.checkAuth, (req, res) => {
-    res.send('add actor');
-});
+router.post('/addactor', adminUser.checkAuth, Actors.AddActor);
 
 
 //put requests

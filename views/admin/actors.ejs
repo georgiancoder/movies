@@ -1,5 +1,21 @@
 <%- include('./header') %>
 
-<h4>ACTORS</h4>
+<div class="container-fluid">
+  <h4>ACTORS</h4>
+  <table class="table table-striped">
+		<tr>
+			<th>Image:</th>
+			<th>Fullname:</th>
+			<th>Action:</th>
+		</tr>
+		<% actors.forEach(function(actor){ %>
+			<tr>
+				<td><img src="<%= actor.avatar %>" style="width: 50px; height: 50px; object-fit: cover;"></td>
+				<td><%= actor.name + '  ' + actor.lastName %></td>
+				<td><a href="" class="btn btn-sm btn-success" role="button"><i class="fa fa-edit"></i>Edit</a> <button type="button" class="btn btn-sm btn-danger" onclick=""><i class="fa fa-remove"></i>Delete</button></td>
+			</tr>
+		<% }) %>
+	</table>
+</div>
 
 <%- include('./footer') %>
