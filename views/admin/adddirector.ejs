@@ -74,7 +74,7 @@
 							<div class="form-group">
 							<% if(director.avatar && director.avatar.length > 0) { %>
 								<img src="<%= director.avatar %>" style="width: 80px; height: 80px; object-fit: cover;">
-								<a>delete avatar</a>
+								<button class="btn btn-sm btn-danger" type="button" onclick="deleteDirectorAvatar('<%= director._id %>',this)">delete avatar</button>
 							<% } else { %>
 								<label for="avatar">Avatar:</label>
 								<input type="file" class="form-control-file" name="avatar" id="avatar">

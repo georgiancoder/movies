@@ -74,7 +74,7 @@ router.get('/directors', adminUser.checkAuth, (req, res) => {
             console.log(err);
         }else{
             opt.directors = data;
-            res.render('admin/directors', opt); 
+            res.render('admin/directors', opt);
         }
     });
 });
@@ -98,10 +98,10 @@ router.get('/editdirector/:id',adminUser.checkAuth,(req,res)=>{
             console.log(err);
         }else{
             opt.director = data;
-            res.render('admin/adddirector', opt);   
+            res.render('admin/adddirector', opt);
         }
     });
-    
+
 })
 
 router.get('/actors', adminUser.checkAuth, (req, res) => {
@@ -133,6 +133,17 @@ router.post('/addactor', adminUser.checkAuth, (req, res) => {
     res.send('add actor');
 });
 
+
+//put requests
+router.put('/removediravatar',adminUser.checkAuth,(req,res)=>{
+  Directors.deleteAvatar(req.body,(err)=>{
+    if(err){
+      console.log(err);
+    }else{
+      res.json({success: true, id: req.body.id});
+    }
+  });
+})
 
 
 module.exports = router;

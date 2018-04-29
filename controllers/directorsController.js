@@ -68,6 +68,20 @@ class directorsController {
     getDirectorById(id,cb){
         directors.getDirectorById(id,cb);
     }
+
+    deleteAvatar(data,cb){
+      if(data && data.id){
+        directors.deleteAvatar(data.id,(err,data)=>{
+          if(err){
+            console.log(err);
+          }else{
+            fs.unlink(`public${data.avatar}`,cb);
+          }
+        });
+      }else{
+        console.log('no data to delete');
+      }
+    }
 }
 
 module.exports = directorsController;

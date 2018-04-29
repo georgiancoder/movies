@@ -30,3 +30,8 @@ module.exports.getDirectorById = function(id,cb){
 	let director = this;
 	director.findById(id,cb);
 }
+
+module.exports.deleteAvatar = function(id,cb){
+  let director = this;
+  director.findByIdAndUpdate(id,{avatar: ''},cb);
+}
