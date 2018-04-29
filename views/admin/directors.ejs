@@ -14,7 +14,7 @@
 				<td><img src="<%= director.avatar %>" style="width: 50px; height: 50px; object-fit: cover;"></td>
 				<td><%= director.name + '  ' + director.lastName %></td>
 				<td><%= director.moreInfo %></td>
-				<td><a href="/admin/editdirector/<%= director._id %>" class="btn btn-sm btn-success" role="button"><i class="fa fa-edit"></i>Edit</a> <a href="/admin/deldirector/<%= director._id %>" class="btn btn-sm btn-danger" role="button"><i class="fa fa-remove"></i>Delete</a></td>
+				<td><a href="/admin/editdirector/<%= director._id %>" class="btn btn-sm btn-success" role="button"><i class="fa fa-edit"></i>Edit</a> <button type="button" class="btn btn-sm btn-danger" onclick="deleteDirector('<%= director._id %>',this)"><i class="fa fa-remove"></i>Delete</button></td>
 			</tr>
 		<% }) %>
 	</table>

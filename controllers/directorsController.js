@@ -82,6 +82,23 @@ class directorsController {
         console.log('no data to delete');
       }
     }
+
+    deleteDirector(data,cb){
+      if(data && data.id){
+        directors.removeDirector(data.id,(err,director)=>{
+          if(err){
+            console.log(err);
+          }else {
+            if(fs.existsSync(`public${director.avatar}`)){
+              fs.unlink(`public${director.avatar}`,cb);
+            }else{
+              cb(null);
+            }
+
+          }
+        });
+      }
+    }
 }
 
 module.exports = directorsController;

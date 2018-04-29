@@ -143,6 +143,17 @@ router.put('/removediravatar',adminUser.checkAuth,(req,res)=>{
       res.json({success: true, id: req.body.id});
     }
   });
+});
+
+//delete requests
+router.delete('/deldirector',adminUser.checkAuth,(req,res)=>{
+  Directors.deleteDirector(req.body,(err)=>{
+    if(err){
+      console.log(err);
+    }else{
+      res.json({success: true});
+    }
+  });
 })
 
 
