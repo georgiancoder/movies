@@ -45,6 +45,7 @@
 			</form>
 		<% } else if(page && page == 'editdirector') { %>
 			<form action="/admin/editdirector" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="id" value="<%= director._id %>">
 				<div class="card-header">
 					<strong><%= director.name.toUpperCase() %> <%= director.lastName.toUpperCase() %></strong>
 				</div>

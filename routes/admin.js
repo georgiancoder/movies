@@ -137,10 +137,15 @@ router.get('/logout', adminUser.logOut);
 router.post('/login', adminUser.login);
 router.post('/addcategorie', adminUser.checkAuth, Categorie.addCategorie);
 
-router.post('/adddirector', adminUser.checkAuth, Directors.addDirector);
+router.post('/adddirector', adminUser.checkAuth, (req,res,next)=>{
+  Directors.addDirector(req,res,next);
+});
 
 router.post('/addactor', adminUser.checkAuth, Actors.AddActor);
 
+router.post('/editdirector',adminUser.checkAuth,(req,res,next)=>{
+  Directors.editDirector(req,res,next);
+});
 
 //put requests
 router.put('/removediravatar',adminUser.checkAuth,(req,res)=>{

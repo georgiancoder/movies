@@ -21,6 +21,16 @@ module.exports.addDirector = function(data, cb){
 	newDirector.save(cb);
 }
 
+module.exports.editDirector = function(data, cb){
+  let director = this;
+  director.findByIdAndUpdate(data.id,{
+    name: data.name,
+    lastName: data.lastname,
+    moreInfo: data.url,
+    avatar: data.avatar
+  },cb);
+}
+
 module.exports.getDirectors = function(cb){
 	let director = this;
 	director.find(cb);
