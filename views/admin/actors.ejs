@@ -12,7 +12,7 @@
 			<tr>
 				<td><img src="<%= actor.avatar %>" style="width: 50px; height: 50px; object-fit: cover;"></td>
 				<td><%= actor.name + '  ' + actor.lastName %></td>
-				<td><a href="/admin/editactor/<%= actor._id %>" class="btn btn-sm btn-success" role="button"><i class="fa fa-edit"></i>Edit</a> <button type="button" class="btn btn-sm btn-danger" onclick=""><i class="fa fa-remove"></i>Delete</button></td>
+				<td><a href="/admin/editactor/<%= actor._id %>" class="btn btn-sm btn-success" role="button"><i class="fa fa-edit"></i>Edit</a> <button type="button" class="btn btn-sm btn-danger" onclick="deleteActor('<%= actor._id %>',this)"><i class="fa fa-remove"></i>Delete</button></td>
 			</tr>
 		<% }) %>
 	</table>

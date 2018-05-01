@@ -34,3 +34,8 @@ module.exports.deleteAvatar = function(id,cb){
   let actor = this;
   actor.findByIdAndUpdate(id,{avatar: ''},cb);
 }
+
+module.exports.removeActor = function(id,cb){
+	let actor = this;
+  actor.findByIdAndRemove(id,cb);
+}

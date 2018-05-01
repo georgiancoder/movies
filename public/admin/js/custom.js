@@ -29,6 +29,23 @@ function deleteDirector(id,el){
   })
 }
 
+function deleteActor(id,el){
+  var that = el;
+  $.ajax({
+    url: '/admin/delactor',
+    data: {id: id},
+    type: 'DELETE',
+    success: function(msg){
+      if(msg && msg.success){
+        $(that).parent().parent().remove();
+      }
+    },
+    error: function(xhr){
+      alert(xhr.status);
+    }
+  })
+}
+
 function deleteActorAvatar(id,el){
   var that = el;
   $.ajax({

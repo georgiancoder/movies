@@ -196,7 +196,13 @@ router.delete('/deldirector',adminUser.checkAuth,(req,res)=>{
 });
 
 router.delete('/delactor',adminUser.checkAuth,(req,res)=>{
-  res.send('vaja')
+  Actors.deleteActor(req.body,(err)=>{
+    if(err){
+      console.log(err);
+    }else{
+      res.json({success: true, id: req.body.id});
+    }
+  });
 });
 
 

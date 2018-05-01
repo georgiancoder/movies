@@ -89,6 +89,22 @@ class ActorController {
     }
   }
 
+  deleteActor(data,cb){
+    if(data && data.id){
+      actors.removeActor(data.id,(err,actor)=>{
+        if(err){
+          console.log(err);
+        }else {
+          if(actor.avatar.length > 0 && fs.existsSync(`public${actor.avatar}`)){
+            fs.unlink(`public${actor.avatar}`,cb);
+          }else{
+            cb(null);
+          }
+        }
+      });
+    }
+  }
+
 }
 
 module.exports = ActorController;
