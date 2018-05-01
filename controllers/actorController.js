@@ -70,6 +70,25 @@ class ActorController {
   getActorById(id,cb){
     actors.getActorById(id,cb);
   }
+
+  deleteAvatar(data,cb){
+    if(data && data.id){
+      actors.deleteAvatar(data.id,(err,data)=>{
+        if(err){
+          console.log(err);
+        }else{
+          if(data.avatar.length > 0 &&  fs.existsSync(`public${data.avatar}`)){
+            fs.unlink(`public${data.avatar}`,cb);
+          }else{
+            cb(null);
+          }
+        }
+      });
+    }else{
+      console.log('no data to delete');
+    }
+  }
+
 }
 
 module.exports = ActorController;

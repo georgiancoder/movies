@@ -37,6 +37,7 @@
 		</form>
 		<% } else if(page && page == 'editactor') { %>
 			<form action="/admin/editactor" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="id" value="<%= actor._id %>">
 			<div class="card-header">
 				<strong><%= actor.name.toUpperCase() %> <%= actor.lastName.toUpperCase() %></strong>
 			</div>

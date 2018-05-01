@@ -28,3 +28,17 @@ function deleteDirector(id,el){
     }
   })
 }
+
+function deleteActorAvatar(id,el){
+  var that = el;
+  $.ajax({
+    url: '/admin/removeactavatar',
+    data: {id: id},
+    type: 'PUT',
+    success: function(msg){
+      if(msg && msg.success){
+        location.reload();
+      }
+    }
+  })
+}

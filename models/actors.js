@@ -29,3 +29,8 @@ module.exports.getActorById = function(id,cb){
 	let actor = this;
 	actor.findById(id,cb);
 }
+
+module.exports.deleteAvatar = function(id,cb){
+  let actor = this;
+  actor.findByIdAndUpdate(id,{avatar: ''},cb);
+}
