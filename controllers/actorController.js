@@ -7,7 +7,71 @@ const fs = require('fs');
 class ActorController {
 
   AddActor(req,res){
+    this.uploadAvatar(req,res,(err)=>{
+      if (err) {
+          res.json(err);
+      } else {
+          if (req.file) {
+              req.body.avatar = '/uploads/actors/' + req.file.filename;
+          } else {
+              req.body.avatar = '';
+          }
+          const errorFormatter = ({ location, msg, param, value, nestedErrors }) => {
+              return `${location}[${param}]: ${msg}`;
+          };
+          req.checkBody('name', 'name required').notEmpty();
+          req.checkBody('lastname', 'lastname required').notEmpty();
+          const result = validationResult(req).formatWith(errorFormatter);
+          if (!result.isEmpty()) {
+              // { errors: [ "body[password]: must be at least 10 chars long" ] }
+              return res.json({ errors: result.array() });
+          } else {
+              actors.addActor(req.body, (err, data) => {
+                  if(err){
+                    console.log(err);
+                  }else{
+                    res.redirect('/admin/addactor');
+                  }
+              });
+          }
+      }
+    });
+  }
 
+  editActor(req,res){
+    this.uploadAvatar(req,res,(err)=>{
+      if (err) {
+          res.json(err);
+      } else {
+          if (req.file) {
+              req.body.avatar = '/uploads/actors/' + req.file.filename;
+          } else {
+              req.body.avatar = '';
+          }
+          const errorFormatter = ({ location, msg, param, value, nestedErrors }) => {
+              return `${location}[${param}]: ${msg}`;
+          };
+          req.checkBody('id','id must me required').notEmpty();
+          req.checkBody('name', 'name required').notEmpty();
+          req.checkBody('lastname', 'lastname required').notEmpty();
+          const result = validationResult(req).formatWith(errorFormatter);
+          if (!result.isEmpty()) {
+              // { errors: [ "body[password]: must be at least 10 chars long" ] }
+              return res.json({ errors: result.array() });
+          } else {
+              actors.editActor(req.body,(err,data)=>{
+                if(err){
+                  console.log(err);
+                }else{
+                  res.redirect(`/admin/editactor/${data._id}`);
+                }
+              });
+          }
+      }
+    });
+  }
+
+  uploadAvatar(req,res,cb){
     let dir = './public/uploads/actors';
     if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir);
@@ -20,9 +84,6 @@ class ActorController {
             callback(null, file.fieldname + '-' + Date.now() + file.originalname);
         }
     });
-    const errorFormatter = ({ location, msg, param, value, nestedErrors }) => {
-        return `${location}[${param}]: ${msg}`;
-    };
 
     let upload = multer({
         storage: storage,
@@ -37,33 +98,11 @@ class ActorController {
     }).single('avatar');
 
     upload(req, res, (err) => {
-        if (err) {
-            res.json(err);
-        } else {
-            if (req.file) {
-                req.body.avatar = '/uploads/actors/' + req.file.filename;
-            } else {
-                req.body.avatar = '';
-            }
-
-            req.checkBody('name', 'name required').notEmpty();
-            req.checkBody('lastname', 'lastname required').notEmpty();
-            const result = validationResult(req).formatWith(errorFormatter);
-            if (!result.isEmpty()) {
-                // { errors: [ "body[password]: must be at least 10 chars long" ] }
-                return res.json({ errors: result.array() });
-            } else {
-                actors.addActor(req.body, (err, data) => {
-                    if(err){
-                      console.log(err);
-                    }else{
-                      res.redirect('/admin/addactor');
-                    }
-                });
-            }
-        }
+      cb(err);
     });
+
   }
+
   getActors(cb){
     actors.getAllActor(cb);
   }

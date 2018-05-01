@@ -20,6 +20,15 @@ module.exports.addActor = function(data,cb){
 	newActor.save(cb);
 }
 
+module.exports.editActor = function(data,cb){
+	let actor = this;
+	actor.findByIdAndUpdate(data.id,{
+		name: data.name,
+		lastName: data.lastname,
+		avatar: data.avatar
+	},cb);
+}
+
 module.exports.getAllActor = function(cb){
 	let actor = this;
 	actor.find(cb);

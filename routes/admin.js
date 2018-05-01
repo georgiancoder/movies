@@ -157,11 +157,17 @@ router.post('/adddirector', adminUser.checkAuth, (req,res,next)=>{
   Directors.addDirector(req,res,next);
 });
 
-router.post('/addactor', adminUser.checkAuth, Actors.AddActor);
-
-router.post('/editdirector',adminUser.checkAuth,(req,res,next)=>{
-  Directors.editDirector(req,res,next);
+router.post('/addactor', adminUser.checkAuth, (req,res,next)=>{
+  Actors.AddActor(req,res,next);
 });
+
+router.post('/editdirector',adminUser.checkAuth,(req,res)=>{
+  Directors.editDirector(req,res);
+});
+
+router.post('/editactor',adminUser.checkAuth,(req,res,next)=>{
+  Actors.editActor(req,res);
+})
 
 //put requests
 router.put('/removediravatar',adminUser.checkAuth,(req,res)=>{
