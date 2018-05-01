@@ -122,6 +122,22 @@ router.get('/actors', adminUser.checkAuth, (req, res) => {
 
 });
 
+router.get('/editactor/:id',adminUser.checkAuth,(req,res)=>{
+    let opt = {
+        page: 'editactor',
+        user: req.user
+    };
+    let id = req.params.id ? req.params.id : null;
+    Actors.getActorById(id,(err,data)=>{
+        if(err){
+            console.log(err);
+        }else{
+            opt.actor = data;
+            res.render('admin/addactor',opt);
+        }
+    });
+});
+
 router.get('/addactor', adminUser.checkAuth, (req, res) => {
     let opt = {
         page: 'addactor',

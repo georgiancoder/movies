@@ -5,7 +5,9 @@ const path = require('path');
 const fs = require('fs');
 
 class ActorController {
+
   AddActor(req,res){
+
     let dir = './public/uploads/actors';
     if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir);
@@ -64,6 +66,9 @@ class ActorController {
   }
   getActors(cb){
     actors.getAllActor(cb);
+  }
+  getActorById(id,cb){
+    actors.getActorById(id,cb);
   }
 }
 

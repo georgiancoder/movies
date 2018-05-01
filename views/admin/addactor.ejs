@@ -1,8 +1,9 @@
 <%- include('./header') %>
 
 <div class="container-fluid">
-	<h4>ADD ACTOR</h4>
+	<h4><% if(page && page =='addactor'){ %> ADD ACTOR <% } else if(page && page == 'editactor') { %> EDIT ACTOR <% } %></h4>
 	<div class="card">
+		<% if(page && page =='addactor'){ %>
 		<form action="/admin/addactor" method="post" enctype="multipart/form-data">
 			<div class="card-header">
 				<strong>Add Actor form</strong>
@@ -34,6 +35,44 @@
 				<button type="reset" class="btn btn-sm btn-danger">Clear Data</button>
 			</div>
 		</form>
+		<% } else if(page && page == 'editactor') { %>
+			<form action="/admin/editactor" method="post" enctype="multipart/form-data">
+			<div class="card-header">
+				<strong><%= actor.name.toUpperCase() %> <%= actor.lastName.toUpperCase() %></strong>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="name">Name:</label>
+							<input type="text" name="name" id="name" value="<%= actor.name %>" class="form-control" placeholder="Input Actor Name" required>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="lastname">Last Name:</label>
+							<input type="text" name="lastname" value="<%= actor.lastName %>" id="lastname" class="form-control" placeholder="Input Actor Last Name" required>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<% if(actor.avatar && actor.avatar.length > 0) { %>
+								<img src="<%= actor.avatar %>" style="width: 80px; height: 80px; object-fit: cover;">
+								<button class="btn btn-sm btn-danger" type="button" onclick="deleteActorAvatar('<%= actor._id %>',this)">delete avatar</button>
+							<% } else { %>
+								<label for="avatar">Avatar:</label>
+								<input type="file" class="form-control-file" name="avatar" id="avatar">
+							<% } %>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-footer">
+				<button type="submit" class="btn btn-sm btn-primary">Edit Actor</button>
+				<button type="reset" class="btn btn-sm btn-danger">Reset Data</button>
+			</div>
+		</form>
+		<% } %>
 	</div>
 </div>
 

@@ -24,3 +24,8 @@ module.exports.getAllActor = function(cb){
 	let actor = this;
 	actor.find(cb);
 }
+
+module.exports.getActorById = function(id,cb){
+	let actor = this;
+	actor.findById(id,cb);
+}
