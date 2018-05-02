@@ -78,7 +78,6 @@ $().ready(function(){
 
 
 
-  $("#categorieSort").sortable();
 
 
 });
