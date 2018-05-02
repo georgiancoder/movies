@@ -40,6 +40,10 @@ class Categorie {
         }
       })
   }
+
+  editCategory(id,cb){
+    categorie.getCategoryById(id,cb);
+  }
 }
 
 module.exports = Categorie;

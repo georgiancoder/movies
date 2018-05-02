@@ -12,6 +12,11 @@ module.exports.getCategories = function(cb){
 	categorie.find(cb).sort('order');
 }
 
+module.exports.getCategoryById = function(id,cb){
+	let categorie = this;
+	categorie.findById(id,cb);
+}
+
 module.exports.addNewCategorie = function(data,cb){
 	let categorie = this;
 	let newCategorie = new categorie();

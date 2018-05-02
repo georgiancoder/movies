@@ -50,6 +50,22 @@ router.get('/addcategorie', adminUser.checkAuth, (req, res) => {
     res.render('admin/addcategorie', opt);
 });
 
+router.get('/editcategory/:id',adminUser.checkAuth,(req,res)=>{
+  let opt = {
+      page: 'editcategory',
+      user: req.user
+  };
+  let id = req.params.id ? req.params.id : null;
+  Categorie.editCategory(id,(err,data)=>{
+    if(err){
+        console.log(err);
+    }else{
+        opt.categorie = data;
+        res.render('admin/addcategorie', opt);
+    }
+  });
+});
+
 router.get('/movies', adminUser.checkAuth, (req, res) => {
     let opt = {
         page: 'movies',
