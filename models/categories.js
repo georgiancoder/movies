@@ -26,6 +26,14 @@ module.exports.addNewCategorie = function(data,cb){
 	newCategorie.save(cb);
 }
 
+module.exports.updateCategorie = function(data,cb){
+	let categorie = this;
+	categorie.findByIdAndUpdate(data.id,{
+		title: data.title,
+		order: data.order
+	},cb);
+}
+
 module.exports.removeCategorie = function(id,cb){
 	let categorie = this;
 	categorie.findByIdAndRemove(id,cb);

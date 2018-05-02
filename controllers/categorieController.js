@@ -41,8 +41,26 @@ class Categorie {
       })
   }
 
-  editCategory(id,cb){
+  getCategorieById(id,cb){
     categorie.getCategoryById(id,cb);
+  }
+
+  editCategorie(req,res){
+    req.checkBody('title','title is required').notEmpty();
+    req.checkBody('id','id is required').notEmpty();
+    req.getValidationResult().then(result =>{
+      if(!result.isEmpty()){
+        res.json(result.array());
+      }else{
+        categorie.updateCategorie(req.body,(err,data)=>{
+          if(err){
+            console.log(err);
+          }else{
+            res.redirect(`/admin/editcategory/${data._id}`);
+          }
+        });
+      }
+    })
   }
 }
 

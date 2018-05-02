@@ -56,7 +56,7 @@ router.get('/editcategory/:id',adminUser.checkAuth,(req,res)=>{
       user: req.user
   };
   let id = req.params.id ? req.params.id : null;
-  Categorie.editCategory(id,(err,data)=>{
+  Categorie.getCategorieById(id,(err,data)=>{
     if(err){
         console.log(err);
     }else{
@@ -183,6 +183,10 @@ router.post('/editdirector',adminUser.checkAuth,(req,res)=>{
 
 router.post('/editactor',adminUser.checkAuth,(req,res,next)=>{
   Actors.editActor(req,res);
+})
+
+router.post('/editcategorie',adminUser.checkAuth,(req,res)=>{
+  Categorie.editCategorie(req,res);
 })
 
 //put requests
