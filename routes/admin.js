@@ -211,5 +211,9 @@ router.delete('/delactor',adminUser.checkAuth,(req,res)=>{
   });
 });
 
+router.delete('/removecategory',adminUser.checkAuth,(req,res)=>{
+    Categorie.removeCategory(req,res);
+});
+
 
 module.exports = router;

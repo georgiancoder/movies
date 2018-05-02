@@ -59,3 +59,26 @@ function deleteActorAvatar(id,el){
     }
   })
 }
+
+function deleteCategory(id){
+  $.ajax({
+    url: '/admin/removecategory',
+    data: {id: id},
+    type: 'DELETE',
+    success: function(msg){
+      if(msg && msg.success){
+        location.reload();
+      }
+    }
+  })
+}
+
+
+$().ready(function(){
+
+
+
+  $("#categorieSort").sortable();
+
+
+});

@@ -23,6 +23,23 @@ class Categorie {
   getCategories(cb){
     categorie.getCategories(cb);
   }
+
+  removeCategory(req,res){
+    req.checkBody('id','id is required').notEmpty();
+    req.getValidationResult().then(result =>{
+        if(!result.isEmpty()){
+          res.json(result.array());
+        }else{
+          categorie.removeCategorie(req.body.id,(err,cat)=>{
+            if(err){
+              console.log(err);
+            }else{
+              res.json({success: true});
+            }
+          });
+        }
+      })
+  }
 }
 
 module.exports = Categorie;
