@@ -1,6 +1,7 @@
 # Node build artifacts
 node_modules
 public/uploads/directors
+public/uploads/actors
 npm-debug.log
 
 # Local development
