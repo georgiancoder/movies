@@ -23,3 +23,19 @@ const moviesSchema=mongoose.Schema({
 });
 
 module.exports=mongoose.model('movies',moviesSchema);
+
+
+module.exports.addNewMovie = function(data,cb){
+	let movie = this;
+	let newMovie = new movie();
+
+	newMovie.title.en = data.titleen;
+	newMovie.title.ka = data.title;
+	newMovie.releaseYear = data.releaseYear;
+	newMovie.country = data.country;
+	newMovie.length = data.length;
+	newMovie.budget = data.budget;
+	newMovie.income = data.income;
+	newMovie.description = data.description;
+	newMovie.poster = data.poster;
+}

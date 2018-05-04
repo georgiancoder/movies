@@ -3,7 +3,7 @@
 <div class="container-fluid">
 	<h4>ADD MOVIES</h4>
 	<div class="card">
-		<form>
+		<form action="/admin/addmovie" method="POST" enctype="multipart/form-data" id="movieForm">
 			<div class="card-header">
 				<strong>Add Movie Form</strong>
 			</div>
@@ -18,7 +18,7 @@
 					<div class="col-sm-4">
 						<div class="form-group">
 							<label for="titleen">Title in English:</label>
-							<input type="text" name="titleen" id="titleen" class="form-control" placeholder="Input Movie Title in English" required>
+							<input type="text" name="titleen" id="titleen" class="form-control" placeholder="Input Movie Title in English">
 						</div>
 					</div>
 					<div class="col-sm-1">
@@ -59,6 +59,7 @@
 						<div class="form-group">
 							<label>Movie Description:</label>
 							<div id="moviedescription"></div>
+							<textarea id="movieDescriptionInput" name="desciption" style="display:none;"></textarea>
 						</div>
 					</div>
 				</div>
@@ -126,7 +127,7 @@
 				</div>
 			</div>
 			<div class="card-footer">
-				<button type="submit" class="btn btn-sm btn-primary">Add Movie</button>
+				<button type="submit" class="btn btn-sm btn-primary" >Add Movie</button>
 				<button type="reset" class="btn btn-sm btn-danger">Clear Data</button>
 			</div>
 		</form>
@@ -162,6 +163,12 @@
 	    theme: 'snow'
 	  });
 
+
+	  $('#movieForm').submit(function() {
+		  $("#movieDescriptionInput").val($(".ql-editor").html());
+		});
+
+
 	  $("#categories").select2({
 	  	theme: "bootstrap",
     	placeholder: "--Select Categorie--",
@@ -178,6 +185,8 @@
     	allowClear: true
 	  });
 	}
+
+
 </script>
 
 <%- include('./footer') %>

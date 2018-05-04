@@ -4,6 +4,7 @@ const admin = require('../controllers/adminUserController');
 const categorie = require('../controllers/categorieController');
 const directos = require('../controllers/directorsController');
 const actors = require('../controllers/actorController');
+const Movies = require('../controllers/movieController');
 
 const adminUser = new admin();
 const Categorie = new categorie();
@@ -177,6 +178,10 @@ router.post('/addactor', adminUser.checkAuth, (req,res,next)=>{
   Actors.AddActor(req,res,next);
 });
 
+router.post('/addmovie', adminUser.checkAuth, (req,res)=>{
+  Movies.addMovie(req,res);
+})
+
 router.post('/editdirector',adminUser.checkAuth,(req,res)=>{
   Directors.editDirector(req,res);
 });
@@ -209,6 +214,8 @@ router.put('/removeactavatar',adminUser.checkAuth,(req,res)=>{
     }
   });
 });
+
+
 
 //delete requests
 router.delete('/deldirector',adminUser.checkAuth,(req,res)=>{
