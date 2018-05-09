@@ -26,6 +26,12 @@ module.exports.addNewCategorie = function(data,cb){
 	newCategorie.save(cb);
 }
 
+module.exports.search = function(patt,cb){
+	let categorie = this;
+	let pattern = new RegExp(patt);
+	categorie.find({"title": pattern},cb);
+}
+
 module.exports.updateCategorie = function(data,cb){
 	let categorie = this;
 	categorie.findByIdAndUpdate(data.id,{

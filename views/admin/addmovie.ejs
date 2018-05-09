@@ -101,26 +101,30 @@
 					<div class="col-sm-4">
 						<div class="form-group">
 							<label for="categories">Categories:</label>
-							<select id="categories" class="form-control">
-
+							<select id="categories" name="categories" class="form-control" multiple>
+								<% for(var i=0; i<categories.length; i++) {%>
+								   <option value="<%= categories[i]._id %>"><%= categories[i].title %></option>
+								<% } %>
 							</select>
 						</div>
 					</div>
 					<div class="col-sm-4">
 						<div class="form-group">
 							<label for="actors">Actors:</label>
-							<select id="actors" class="form-control">
-
+							<select id="actors" name="actors" class="form-control" multiple>
+								<% for(var i=0; i<actors.length; i++) {%>
+									 <option value="<%= actors[i]._id %>"><%= actors[i].name %> <%= actors[i].lastName %></option>
+								<% } %>
 							</select>
 						</div>
 					</div>
 					<div class="col-sm-4">
 						<div class="form-group">
 							<label for="directors">Directors:</label>
-							<select id="directors" class="form-control" multiple>
-								<option>chak noris</option>
-								<option>van dami</option>
-								<option>brus li</option>
+							<select id="directors" name="directors" class="form-control" multiple>
+								<% for(var i=0; i<directors.length; i++) {%>
+									 <option value="<%= directors[i]._id %>"><%= directors[i].name %> <%= directors[i].lastName %></option>
+								<% } %>
 							</select>
 						</div>
 					</div>
@@ -167,7 +171,6 @@
 	  $('#movieForm').submit(function() {
 		  $("#movieDescriptionInput").val($(".ql-editor").html());
 		});
-
 
 	  $("#categories").select2({
 	  	theme: "bootstrap",

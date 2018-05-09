@@ -80,7 +80,16 @@ router.get('/addmovie', adminUser.checkAuth, (req, res) => {
         page: 'addmovie',
         user: req.user
     };
-    res.render('admin/addmovie', opt);
+    Categorie.getCategories((err, categories)=>{
+      opt.categories = categories;
+      Directors.getDirectors((err, directors)=>{
+        opt.directors = directors;
+        Actors.getActors((err, actors)=>{
+          opt.actors = actors;
+          res.render('admin/addmovie', opt);
+        });
+      });
+    });
 });
 
 router.get('/directors', adminUser.checkAuth, (req, res) => {
@@ -162,7 +171,6 @@ router.get('/addactor', adminUser.checkAuth, (req, res) => {
     };
     res.render('admin/addactor', opt);
 });
-
 
 router.get('/logout', adminUser.logOut);
 

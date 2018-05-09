@@ -61,6 +61,7 @@ class MovieController {
             cb(err);
         });
     }
+
 }
 
 module.exports = new MovieController();

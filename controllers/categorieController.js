@@ -45,6 +45,19 @@ class Categorie {
     categorie.getCategoryById(id,cb);
   }
 
+  search(req,res){
+    let patt = req.query.search;
+    if(patt){
+      categorie.search(patt,(err,categories)=>{
+        if(err){
+          console.log(err);
+        } else {
+          res.json(categories);
+        }
+      });
+    }
+  }
+
   editCategorie(req,res){
     req.checkBody('title','title is required').notEmpty();
     req.checkBody('id','id is required').notEmpty();
