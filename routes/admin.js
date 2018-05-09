@@ -72,7 +72,15 @@ router.get('/movies', adminUser.checkAuth, (req, res) => {
         page: 'movies',
         user: req.user
     };
-    res.render('admin/movies', opt);
+    Movies.getMovies((err,movies)=>{
+      if(err){
+        console.log(err);
+      } else {
+        opt.movies = movies;
+        res.render('admin/movies', opt);
+      }
+    });
+
 });
 
 router.get('/addmovie', adminUser.checkAuth, (req, res) => {

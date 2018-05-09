@@ -10,10 +10,10 @@ class MovieController {
             if (err) {
                 res.json(err);
             } else {
-                if (req.file) {
-                    req.body.poster = '/uploads/movies/' + req.file.filename;
-                } else {
-                    req.body.poster = '';
+                if (req.files) {
+                  req.files.forEach(file =>{
+                    req.body[file.fieldname] = `/uploads/movies/${file.filename}`;
+                  });
                 }
                 const errorFormatter = ({ location, msg, param, value, nestedErrors }) => {
                     return `${location}[${param}]: ${msg}`;
@@ -25,7 +25,13 @@ class MovieController {
                     // { errors: [ "body[password]: must be at least 10 chars long" ] }
                     return res.json({ errors: result.array() });
                 } else {
-                    res.json(req.body);
+                    movie.addNewMovie(req.body,(err,data)=>{
+                      if(err){
+                        console.log(err);
+                      } else {
+                        res.redirect('/admin/addmovie');
+                      }
+                    });
                 }
             }
         })
@@ -47,19 +53,23 @@ class MovieController {
 
         let upload = multer({
             storage: storage,
-            limits: { fileSize: 2 * 1024 * 1024 },
+            limits: { fileSize: 15 * 1024 * 1024 },
             fileFilter: function(req, file, cb) {
-                if (path.extname(file.originalname) !== ".png" && path.extname(file.originalname) !== ".jpg" && path.extname(file.originalname) !== ".jpeg") {
+                if (path.extname(file.originalname) !== ".png" && path.extname(file.originalname) !== ".jpg" && path.extname(file.originalname) !== ".jpeg" && path.extname(file.originalname) !== ".vtt") {
                     return cb(new Error('only png or jpg'));
                 }
 
                 cb(null, true);
             }
-        }).single('poster');
+        }).any();
 
         upload(req, res, (err) => {
             cb(err);
         });
+    }
+
+    getMovies(cb){
+      movie.getMovies(cb);
     }
 
 }
