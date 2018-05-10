@@ -266,6 +266,16 @@ router.put('/removemovieposter',adminUser.checkAuth, (req,res)=>{
     });
 });
 
+router.put('/removemoviesubtitle', adminUser.checkAuth, (req,res)=>{
+    Movies.deleteSubtitle(req.body,(err)=>{
+        if(err){
+            console.log(err);
+        } else {
+            res.json({success: true});
+        }
+    });
+});
+
 
 
 //delete requests

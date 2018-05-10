@@ -222,7 +222,7 @@
 						<div class="form-group">
 							<% if(movie.subTitles && movie.subTitles.ka && movie.subTitles.ka.length > 0) { %>
 								<a href="<%= movie.subTitles.ka %>">subtitle ka</a>
-								<button class="btn btn-sm btn-danger" type="button" onclick="">delete subtitle</button>
+								<button class="btn btn-sm btn-danger" type="button" onclick="deleteMovieSubtitle('<%= movie._id %>','ka')">delete subtitle</button>
 							<% } else { %>
 								<label for="subtitleka">Subtitles <i class="flag-icon flag-icon-ge h5"></i></label>
 								<input type="file" name="subtitleka" id="subtitleka" class="form-control-file">
@@ -233,7 +233,7 @@
 						<div class="form-group">
 							<% if(movie.subTitles && movie.subTitles.en && movie.subTitles.en.length > 0) { %>
 								<a href="<%= movie.subTitles.en %>">subtitle en</a>
-								<button class="btn btn-sm btn-danger" type="button" onclick="">delete subtitle</button>
+								<button class="btn btn-sm btn-danger" type="button" onclick="deleteMovieSubtitle('<%= movie._id %>','en')">delete subtitle</button>
 							<% } else { %>
 								<label for="subtitleen">Subtitles <i class="flag-icon flag-icon-us h5"></i></label>
 								<input type="file" name="subtitleen" id="subtitleen" class="form-control-file">
@@ -244,7 +244,7 @@
 						<div class="form-group">
 							<% if(movie.subTitles && movie.subTitles.ru && movie.subTitles.ru.length > 0) { %>
 								<a href="<%= movie.subTitles.ru %>">subtitle ru</a>
-								<button class="btn btn-sm btn-danger" type="button" onclick="">delete subtitle</button>
+								<button class="btn btn-sm btn-danger" type="button" onclick="deleteMovieSubtitle('<%= movie._id %>','ru')">delete subtitle</button>
 							<% } else { %>
 								<label for="subtitleru">Subtitles <i class="flag-icon flag-icon-ru h5"></i></label>
 								<input type="file" name="subtitleru" id="subtitleru" class="form-control-file">

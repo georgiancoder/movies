@@ -99,6 +99,19 @@ function deleteMoviePoster(id){
   })
 }
 
+function deleteMovieSubtitle(id,lng){
+  $.ajax({
+    url: '/admin/removemoviesubtitle',
+    data: {id: id, lng: lng},
+    type: 'PUT',
+    success: function(msg){
+      if(msg && msg.success){
+        location.reload();
+      }
+    }
+  })
+}
+
 
 $().ready(function(){
 

@@ -114,6 +114,25 @@ class MovieController {
         }
     }
 
+    deleteSubtitle(data,cb){
+        if(data && data.id && data.lng){
+            movie.updateSubTitle(data,(err,movie)=>{
+                if(err){
+                    console.log(err);
+                } else {
+                    console.log(movie);
+                    if (movie.subTitles[data.lng].length > 0 && fs.existsSync(`public${movie.subTitles[data.lng]}`)) {
+                        fs.unlink(`public${movie.subTitles[data.lng]}`, cb);
+                    } else {
+                        cb(null);
+                    }
+                }
+            });
+        } else {
+            console.log('no data to delete');
+        }
+    }
+
     getMovieById(id, cb) {
         movie.getMovieById(id, cb);
     }

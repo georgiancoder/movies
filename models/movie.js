@@ -85,4 +85,13 @@ module.exports.updatePoster = function(id,cb){
 
 module.exports.updateSubTitle = function(data,cb){
 	let movie = this;
+	
+	let subTitles = {};
+	subTitles[data.lng] = '';
+
+	movie.findByIdAndUpdate(data.id,{subTitles: {
+		$set: {
+			ka: ''
+		}
+	}},cb);
 }
