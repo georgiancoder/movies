@@ -73,6 +73,19 @@ function deleteCategory(id){
   })
 }
 
+function deleteMovie(id){
+  $.ajax({
+    url: '/admin/deletemovie',
+    data: {id: id},
+    type: 'DELETE',
+    success: function(msg){
+      if(msg && msg.success){
+        location.reload();
+      }
+    }
+  })
+}
+
 
 $().ready(function(){
 

@@ -72,6 +72,30 @@ class MovieController {
       movie.getMovies(cb);
     }
 
+    deleteMovie(req,res){
+        if(req.body.id){
+            movie.deleteMovie(req.body.id,(err,data)=>{
+                if(err){
+                    console.log(err);
+                } else {
+                    if(data.poster && data.poster.length > 0 && fs.existsSync(`public${data.poster}`)){
+                      fs.unlinkSync(`public${data.poster}`,);
+                    }
+                    if(data.subTitles && data.subTitles.en && data.subTitles.en.length > 0 && fs.existsSync(`public${data.subTitles.en}`)){
+                      fs.unlinkSync(`public${data.subTitles.en}`);
+                    }
+                    if(data.subTitles && data.subTitles.ka && data.subTitles.ka.length > 0 && fs.existsSync(`public${data.subTitles.ka}`)){
+                      fs.unlinkSync(`public${data.subTitles.ka}`);
+                    }
+                    if(data.subTitles && data.subTitles.ru && data.subTitles.ru.length > 0 && fs.existsSync(`public${data.subTitles.ru}`)){
+                      fs.unlinkSync(`public${data.subTitles.ru}`);
+                    }
+                    res.json({success: true});
+                }
+            });
+        }
+    }
+
 }
 
 module.exports = new MovieController();

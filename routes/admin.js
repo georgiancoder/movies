@@ -258,5 +258,9 @@ router.delete('/removecategory',adminUser.checkAuth,(req,res)=>{
     Categorie.removeCategory(req,res);
 });
 
+router.delete('/deletemovie',adminUser.checkAuth,(req,res)=>{
+  Movies.deleteMovie(req,res);
+})
+
 
 module.exports = router;

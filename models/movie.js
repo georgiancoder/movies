@@ -63,3 +63,9 @@ module.exports.getMovies = function(cb){
 
 	movie.find(cb);
 }
+
+module.exports.deleteMovie = function(id,cb){
+	let movie = this;
+
+	movie.findByIdAndRemove(id,cb);
+}
