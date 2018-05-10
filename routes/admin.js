@@ -235,6 +235,10 @@ router.post('/editcategorie', adminUser.checkAuth, (req, res) => {
     Categorie.editCategorie(req, res);
 })
 
+router.post('/editmovie',adminUser.checkAuth,(req,res)=>{
+  Movies.editMovie(req,res);
+});
+
 //put requests
 router.put('/removediravatar', adminUser.checkAuth, (req, res) => {
     Directors.deleteAvatar(req.body, (err) => {

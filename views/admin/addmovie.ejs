@@ -208,6 +208,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<% if(movie.poster && movie.poster.length > 0) { %>
+								<input type="hidden" name="poster" value="<%= movie.poster %>">
 								<img src="<%= movie.poster %>" style="width: 100px; height: 100px; object-fit: cover;">
 								<button class="btn btn-sm btn-danger" type="button" onclick="deleteMoviePoster('<%= movie._id %>')">delete poster</button>
 							<% } else { %>
@@ -221,6 +222,7 @@
 					<div class="col-sm-4">
 						<div class="form-group">
 							<% if(movie.subTitles && movie.subTitles.ka && movie.subTitles.ka.length > 0) { %>
+								<input type="hidden" name="subtitleka" value="<%= movie.subTitles.ka %>">
 								<a href="<%= movie.subTitles.ka %>">subtitle ka</a>
 								<button class="btn btn-sm btn-danger" type="button" onclick="deleteMovieSubtitle('<%= movie._id %>','ka')">delete subtitle</button>
 							<% } else { %>
@@ -232,6 +234,7 @@
 					<div class="col-sm-4">
 						<div class="form-group">
 							<% if(movie.subTitles && movie.subTitles.en && movie.subTitles.en.length > 0) { %>
+								<input type="hidden" name="subtitleen" value="<%= movie.subTitles.en %>">
 								<a href="<%= movie.subTitles.en %>">subtitle en</a>
 								<button class="btn btn-sm btn-danger" type="button" onclick="deleteMovieSubtitle('<%= movie._id %>','en')">delete subtitle</button>
 							<% } else { %>
@@ -243,6 +246,7 @@
 					<div class="col-sm-4">
 						<div class="form-group">
 							<% if(movie.subTitles && movie.subTitles.ru && movie.subTitles.ru.length > 0) { %>
+								<input type="hidden" name="subtitleru" value="<%= movie.subTitles.ru %>">
 								<a href="<%= movie.subTitles.ru %>">subtitle ru</a>
 								<button class="btn btn-sm btn-danger" type="button" onclick="deleteMovieSubtitle('<%= movie._id %>','ru')">delete subtitle</button>
 							<% } else { %>
@@ -258,7 +262,7 @@
 							<label for="categories">Categories:</label>
 							<select id="categories" name="categories" class="form-control" multiple>
 								<% for(var i=0; i<categories.length; i++) {%>
-									<option value="<%= categories[i]._id %>" 
+									<option value="<%= categories[i]._id %>"
 									<% for(var j=0; j<movie.categorieIds.length; j++) { %>
 										<% if(categories[i]._id == movie.categorieIds[j]){ %>
 											selected
@@ -274,7 +278,7 @@
 							<label for="actors">Actors:</label>
 							<select id="actors" name="actors" class="form-control" multiple>
 								<% for(var i=0; i<actors.length; i++) {%>
-									 <option value="<%= actors[i]._id %>" 
+									 <option value="<%= actors[i]._id %>"
 
 									 <% for(var j=0; j<movie.actors.length; j++) { %>
 										<% if(actors[i]._id == movie.actors[j]){ %>
@@ -299,7 +303,7 @@
 											selected
 										<% } %>
 									<% } %>
-									 
+
 									 ><%= directors[i].name %> <%= directors[i].lastName %></option>
 								<% } %>
 							</select>

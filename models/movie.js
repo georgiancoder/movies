@@ -58,6 +58,40 @@ module.exports.addNewMovie = function(data,cb){
 	newMovie.save(cb);
 }
 
+module.exports.updateMovie = function(data,cb){
+	console.log(data);
+	let movie = this;
+
+	let actors = [];
+	let directors = [];
+	let categorieIds = [];
+
+	actors = actors.concat(data.actors);
+	directors = directors.concat(data.directors);
+	categorieIds = categorieIds.concat(data.categories);
+
+	movie.findByIdAndUpdate(data.id,{
+		title:{
+			ka: data.title,
+			en: data.titleen
+		},
+		releaseYear: data.releaseYear,
+		country: data.country,
+		length: data.length,
+		budget: data.budget,
+		income: data.income,
+		description: data.desciption,
+		poster: data.poster,
+		videoStream: data.movie,
+		"subTitles.ka": data.subtitleka,
+		"subTitles.en": data.subtitleen,
+		"subTitles.ru": data.subtitleru,
+		categorieIds: categorieIds,
+		actors: actors,
+		directors: directors
+	},cb);
+}
+
 module.exports.getMovies = function(cb){
 	let movie = this;
 

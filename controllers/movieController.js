@@ -137,6 +137,39 @@ class MovieController {
         movie.getMovieById(id, cb);
     }
 
+    editMovie(req,res){
+      this.uploadPoster(req, res, (err) => {
+          if (err) {
+              res.json(err);
+          } else {
+              if (req.files) {
+                  req.files.forEach(file => {
+                      req.body[file.fieldname] = `/uploads/movies/${file.filename}`;
+                  });
+              }
+              const errorFormatter = ({ location, msg, param, value, nestedErrors }) => {
+                  return `${location}[${param}]: ${msg}`;
+              };
+              req.checkBody('id', 'movie id is required').notEmpty();
+              req.checkBody('title', 'movie title is required').notEmpty();
+              req.checkBody('movie', 'movie url is required').notEmpty();
+              const result = validationResult(req).formatWith(errorFormatter);
+              if (!result.isEmpty()) {
+                  // { errors: [ "body[password]: must be at least 10 chars long" ] }
+                  return res.json({ errors: result.array() });
+              } else {
+                 movie.updateMovie(req.body,(err,data)=>{
+                   if(err) {
+                     console.log(err);
+                   } else {
+                     res.redirect(`/admin/editmovie/${data._id}`);
+                   }
+                 });
+              }
+          }
+      })
+    }
+
 }
 
 module.exports = new MovieController();
