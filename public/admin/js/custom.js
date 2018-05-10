@@ -86,6 +86,19 @@ function deleteMovie(id){
   })
 }
 
+function deleteMoviePoster(id){
+  $.ajax({
+    url: '/admin/removemovieposter',
+    data: {id: id},
+    type: 'PUT',
+    success: function(msg){
+      if(msg && msg.success){
+        location.reload();
+      }
+    }
+  })
+}
+
 
 $().ready(function(){
 

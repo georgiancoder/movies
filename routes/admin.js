@@ -256,6 +256,16 @@ router.put('/removeactavatar', adminUser.checkAuth, (req, res) => {
     });
 });
 
+router.put('/removemovieposter',adminUser.checkAuth, (req,res)=>{
+    Movies.deletePoster(req.body.id,(err)=>{
+        if(err){
+            console.log(err);
+        } else {
+            res.json({success: true});
+        }
+    });
+});
+
 
 
 //delete requests

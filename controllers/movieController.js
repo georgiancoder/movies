@@ -11,9 +11,9 @@ class MovieController {
                 res.json(err);
             } else {
                 if (req.files) {
-                  req.files.forEach(file =>{
-                    req.body[file.fieldname] = `/uploads/movies/${file.filename}`;
-                  });
+                    req.files.forEach(file => {
+                        req.body[file.fieldname] = `/uploads/movies/${file.filename}`;
+                    });
                 }
                 const errorFormatter = ({ location, msg, param, value, nestedErrors }) => {
                     return `${location}[${param}]: ${msg}`;
@@ -25,12 +25,12 @@ class MovieController {
                     // { errors: [ "body[password]: must be at least 10 chars long" ] }
                     return res.json({ errors: result.array() });
                 } else {
-                    movie.addNewMovie(req.body,(err,data)=>{
-                      if(err){
-                        console.log(err);
-                      } else {
-                        res.redirect('/admin/addmovie');
-                      }
+                    movie.addNewMovie(req.body, (err, data) => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            res.redirect('/admin/addmovie');
+                        }
                     });
                 }
             }
@@ -68,36 +68,54 @@ class MovieController {
         });
     }
 
-    getMovies(cb){
-      movie.getMovies(cb);
+    getMovies(cb) {
+        movie.getMovies(cb);
     }
 
-    deleteMovie(req,res){
-        if(req.body.id){
-            movie.deleteMovie(req.body.id,(err,data)=>{
-                if(err){
+    deleteMovie(req, res) {
+        if (req.body.id) {
+            movie.deleteMovie(req.body.id, (err, data) => {
+                if (err) {
                     console.log(err);
                 } else {
-                    if(data.poster && data.poster.length > 0 && fs.existsSync(`public${data.poster}`)){
-                      fs.unlinkSync(`public${data.poster}`,);
+                    if (data.poster && data.poster.length > 0 && fs.existsSync(`public${data.poster}`)) {
+                        fs.unlinkSync(`public${data.poster}`, );
                     }
-                    if(data.subTitles && data.subTitles.en && data.subTitles.en.length > 0 && fs.existsSync(`public${data.subTitles.en}`)){
-                      fs.unlinkSync(`public${data.subTitles.en}`);
+                    if (data.subTitles && data.subTitles.en && data.subTitles.en.length > 0 && fs.existsSync(`public${data.subTitles.en}`)) {
+                        fs.unlinkSync(`public${data.subTitles.en}`);
                     }
-                    if(data.subTitles && data.subTitles.ka && data.subTitles.ka.length > 0 && fs.existsSync(`public${data.subTitles.ka}`)){
-                      fs.unlinkSync(`public${data.subTitles.ka}`);
+                    if (data.subTitles && data.subTitles.ka && data.subTitles.ka.length > 0 && fs.existsSync(`public${data.subTitles.ka}`)) {
+                        fs.unlinkSync(`public${data.subTitles.ka}`);
                     }
-                    if(data.subTitles && data.subTitles.ru && data.subTitles.ru.length > 0 && fs.existsSync(`public${data.subTitles.ru}`)){
-                      fs.unlinkSync(`public${data.subTitles.ru}`);
+                    if (data.subTitles && data.subTitles.ru && data.subTitles.ru.length > 0 && fs.existsSync(`public${data.subTitles.ru}`)) {
+                        fs.unlinkSync(`public${data.subTitles.ru}`);
                     }
-                    res.json({success: true});
+                    res.json({ success: true });
                 }
             });
         }
     }
 
-    getMovieById(id,cb){
-        movie.getMovieById(id,cb);
+    deletePoster(id, cb) {
+        if (id) {
+            movie.updatePoster(id,(err,data)=>{
+                if (err) {
+                    console.log(err);
+                } else {
+                    if (data.poster.length > 0 && fs.existsSync(`public${data.poster}`)) {
+                        fs.unlink(`public${data.poster}`, cb);
+                    } else {
+                        cb(null);
+                    }
+                }
+            });
+        } else {
+            console.log('no data to delete');
+        }
+    }
+
+    getMovieById(id, cb) {
+        movie.getMovieById(id, cb);
     }
 
 }

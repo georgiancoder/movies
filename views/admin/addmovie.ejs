@@ -209,7 +209,7 @@
 						<div class="form-group">
 							<% if(movie.poster && movie.poster.length > 0) { %>
 								<img src="<%= movie.poster %>" style="width: 100px; height: 100px; object-fit: cover;">
-								<button class="btn btn-sm btn-danger" type="button" onclick="">delete poster</button>
+								<button class="btn btn-sm btn-danger" type="button" onclick="deleteMoviePoster('<%= movie._id %>')">delete poster</button>
 							<% } else { %>
 								<label for="poster">Poster:</label>
 								<input type="file" name="poster" id="poster" class="form-control-file">

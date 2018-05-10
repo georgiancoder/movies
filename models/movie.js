@@ -76,3 +76,13 @@ module.exports.getMovieById = function(id,cb){
 
 	movie.findById(id,cb);
 }
+
+module.exports.updatePoster = function(id,cb){
+	let movie = this;
+
+	movie.findByIdAndUpdate(id,{poster: ''},cb);
+}
+
+module.exports.updateSubTitle = function(data,cb){
+	let movie = this;
+}
