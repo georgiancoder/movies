@@ -96,6 +96,10 @@ class MovieController {
         }
     }
 
+    getMovieById(id,cb){
+        movie.getMovieById(id,cb);
+    }
+
 }
 
 module.exports = new MovieController();

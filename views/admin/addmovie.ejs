@@ -1,8 +1,9 @@
 <%- include('./header') %>
 
 <div class="container-fluid">
-	<h4>ADD MOVIES</h4>
+	<h4><% if(page && page =='addmovie'){ %> ADD MOVIES <% } else if(page && page == 'editmovie') { %> EDIT MOVIE <% } %></h4>
 	<div class="card">
+		<% if(page && page =='addmovie'){ %>
 		<form action="/admin/addmovie" method="POST" enctype="multipart/form-data" id="movieForm">
 			<div class="card-header">
 				<strong>Add Movie Form</strong>
@@ -135,6 +136,183 @@
 				<button type="reset" class="btn btn-sm btn-danger">Clear Data</button>
 			</div>
 		</form>
+		<% } else if(page && page == 'editmovie') { %>
+			<form action="/admin/editmovie" method="POST" enctype="multipart/form-data" id="movieForm">
+			<input type="hidden" name="id" value="<%= movie._id %>">
+			<div class="card-header">
+				<strong>Edit Movie Form</strong>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="title">Title:</label>
+							<input type="text" name="title" id="title" value="<%= movie.title.ka %>" class="form-control" placeholder="Input Movie Title" required>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="titleen">Title in English:</label>
+							<input type="text" name="titleen" id="titleen" value="<%= movie.title.en %>" class="form-control" placeholder="Input Movie Title in English">
+						</div>
+					</div>
+					<div class="col-sm-1">
+						<div class="form-group">
+							<label for="releaseYear">Release Year:</label>
+							<input type="number" name="releaseYear" value="<%= movie.releaseYear %>" id="releaseYear" class="form-control">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-2">
+						<div class="form-group">
+							<label for="country">Country:</label>
+							<input type="text" name="country" value="<%= movie.country %>" id="country" placeholder="Input Country" class="form-control">
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="form-group">
+							<label for="length">Movie Length:</label>
+							<input type="text" name="length" id="length" value="<%= movie.length %>" class="form-control" placeholder="Input Movie Length">
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="form-group">
+							<label for="budget">Budget:</label>
+							<input type="text" name="budget" id="budget" value="<%= movie.budget %>" class="form-control" placeholder="5000000$">
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="form-group">
+							<label for="income">Income:</label>
+							<input type="text" name="income" id="income" value="<%= movie.income %>" class="form-control" placeholder="10000000$">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="form-group">
+							<label>Movie Description:</label>
+							<div id="moviedescription"><%- movie.description %></div>
+							<textarea id="movieDescriptionInput" name="desciption" style="display:none;"><%= movie.description %></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="movie">Movie link:</label>
+							<input type="url" name="movie" id="movie" class="form-control" value="<%= movie.videoStream %>" placeholder="http://somemovie.com/movie.pm4" required>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<% if(movie.poster && movie.poster.length > 0) { %>
+								<img src="<%= movie.poster %>" style="width: 100px; height: 100px; object-fit: cover;">
+								<button class="btn btn-sm btn-danger" type="button" onclick="">delete poster</button>
+							<% } else { %>
+								<label for="poster">Poster:</label>
+								<input type="file" name="poster" id="poster" class="form-control-file">
+							<% } %>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="form-group">
+							<% if(movie.subTitles && movie.subTitles.ka && movie.subTitles.ka.length > 0) { %>
+								<a href="<%= movie.subTitles.ka %>">subtitle ka</a>
+								<button class="btn btn-sm btn-danger" type="button" onclick="">delete subtitle</button>
+							<% } else { %>
+								<label for="subtitleka">Subtitles <i class="flag-icon flag-icon-ge h5"></i></label>
+								<input type="file" name="subtitleka" id="subtitleka" class="form-control-file">
+							<% } %>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<% if(movie.subTitles && movie.subTitles.en && movie.subTitles.en.length > 0) { %>
+								<a href="<%= movie.subTitles.en %>">subtitle en</a>
+								<button class="btn btn-sm btn-danger" type="button" onclick="">delete subtitle</button>
+							<% } else { %>
+								<label for="subtitleen">Subtitles <i class="flag-icon flag-icon-us h5"></i></label>
+								<input type="file" name="subtitleen" id="subtitleen" class="form-control-file">
+							<% } %>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<% if(movie.subTitles && movie.subTitles.ru && movie.subTitles.ru.length > 0) { %>
+								<a href="<%= movie.subTitles.ru %>">subtitle ru</a>
+								<button class="btn btn-sm btn-danger" type="button" onclick="">delete subtitle</button>
+							<% } else { %>
+								<label for="subtitleru">Subtitles <i class="flag-icon flag-icon-ru h5"></i></label>
+								<input type="file" name="subtitleru" id="subtitleru" class="form-control-file">
+							<% } %>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="categories">Categories:</label>
+							<select id="categories" name="categories" class="form-control" multiple>
+								<% for(var i=0; i<categories.length; i++) {%>
+									<option value="<%= categories[i]._id %>" 
+									<% for(var j=0; j<movie.categorieIds.length; j++) { %>
+										<% if(categories[i]._id == movie.categorieIds[j]){ %>
+											selected
+										<% } %>
+									<% } %>
+									><%= categories[i].title %></option>
+								<% } %>
+							</select>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="actors">Actors:</label>
+							<select id="actors" name="actors" class="form-control" multiple>
+								<% for(var i=0; i<actors.length; i++) {%>
+									 <option value="<%= actors[i]._id %>" 
+
+									 <% for(var j=0; j<movie.actors.length; j++) { %>
+										<% if(actors[i]._id == movie.actors[j]){ %>
+											selected
+										<% } %>
+									<% } %>
+
+									 ><%= actors[i].name %> <%= actors[i].lastName %></option>
+								<% } %>
+							</select>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="directors">Directors:</label>
+							<select id="directors" name="directors" class="form-control" multiple>
+								<% for(var i=0; i<directors.length; i++) {%>
+									 <option value="<%= directors[i]._id %>"
+
+									 <% for(var j=0; j<movie.directors.length; j++) { %>
+										<% if(directors[i]._id == movie.directors[j]){ %>
+											selected
+										<% } %>
+									<% } %>
+									 
+									 ><%= directors[i].name %> <%= directors[i].lastName %></option>
+								<% } %>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-footer">
+				<button type="submit" class="btn btn-sm btn-primary" >Edit Movie</button>
+				<button type="reset" class="btn btn-sm btn-danger">Reset Data</button>
+			</div>
+		</form>
+		<% } %>
 	</div>
 </div>
 

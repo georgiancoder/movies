@@ -45,7 +45,7 @@ module.exports.addNewMovie = function(data,cb){
 	newMovie.length = data.length;
 	newMovie.budget = data.budget;
 	newMovie.income = data.income;
-	newMovie.description = data.description;
+	newMovie.description = data.desciption;
 	newMovie.poster = data.poster;
 	newMovie.videoStream = data.movie;
 	newMovie.subTitles.en = data.subtitleen;
@@ -53,7 +53,7 @@ module.exports.addNewMovie = function(data,cb){
 	newMovie.subTitles.ru = data.subtitleru;
 	newMovie.categorieIds = categorieIds;
 	newMovie.actors = actors;
-	newMovie.directos = directors;
+	newMovie.directors = directors;
 
 	newMovie.save(cb);
 }
@@ -68,4 +68,11 @@ module.exports.deleteMovie = function(id,cb){
 	let movie = this;
 
 	movie.findByIdAndRemove(id,cb);
+}
+
+
+module.exports.getMovieById = function(id,cb){
+	let movie = this;
+
+	movie.findById(id,cb);
 }
