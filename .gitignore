@@ -2,6 +2,7 @@
 node_modules
 public/uploads/directors
 public/uploads/actors
+public/uploads/movies
 npm-debug.log
 
 # Local development
