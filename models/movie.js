@@ -96,6 +96,12 @@ module.exports.updateMovie = function(data,cb){
 	},cb);
 }
 
+module.exports.getByCategorieId = function(id,cb){
+	let movie = this;
+
+	movie.find({categorieIds: id},cb);
+}
+
 module.exports.getMovieContent = function(id,cb){
 	let movie = this;
 

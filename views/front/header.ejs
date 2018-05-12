@@ -21,7 +21,7 @@
 				  			<% if(typeof categories != "undefined"){ %>
 				  				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						          <% categories.forEach(categorie=>{ %>
-						          		<a class="dropdown-item" href="categories/<%= categorie._id %>"><%= categorie.title %></a>
+						          		<a class="dropdown-item" href="/categories/<%= categorie._id %>"><%= categorie.title %></a>
 						          	<% }) %>
 						        </div>
 				  			<% } %>

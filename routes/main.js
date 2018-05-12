@@ -39,4 +39,33 @@ router.get('/movie/:id',(req,res)=>{
 
 });
 
+router.get('/categories/:id',(req,res)=>{
+	let opt = {
+		page: 'movie'
+	}
+	let id = req.params.id ? req.params.id : null;
+	Categorie.getCategories((err,categories)=>{
+		opt.categories = categories;
+		Movies.getMoviesByCategorie(id,(err,data)=>{
+			if(err){
+				console.log(err);
+			} else {
+				opt.movies = data;
+				console.log(data);
+				res.render('front/categorie',opt);
+			}
+		});
+	});
+});
+
+router.get('/regauth',(req,res)=>{
+	let opt = {
+		page: 'movie'
+	}
+	Categorie.getCategories((err,categories)=>{
+		opt.categories = categories;
+		res.render('front/regauth',opt);
+	});
+});
+
 module.exports=router;

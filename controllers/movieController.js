@@ -176,6 +176,12 @@ class MovieController {
       }
     }
 
+    getMoviesByCategorie(catid,cb){
+      if(catid){
+        movie.getByCategorieId(catid,cb);
+      }
+    }
+
 }
 
 module.exports = new MovieController();
