@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+let Schema = mongoose.Schema;
+let ObjectId = Schema.ObjectId;
 
 const moviesSchema=mongoose.Schema({
 	title: {
@@ -18,9 +20,9 @@ const moviesSchema=mongoose.Schema({
 		ka: String,
 		ru: String
 	},
-	categorieIds: [],
-	actors: [],
-	directors: []
+	categorieIds: [ObjectId],
+	actors: [ObjectId],
+	directors: [ObjectId]
 });
 
 module.exports=mongoose.model('movies',moviesSchema);
@@ -33,6 +35,8 @@ module.exports.addNewMovie = function(data,cb){
 	let actors = [];
 	let directors = [];
 	let categorieIds = [];
+
+
 
 	actors = actors.concat(data.actors);
 	directors = directors.concat(data.directors);
@@ -90,6 +94,42 @@ module.exports.updateMovie = function(data,cb){
 		actors: actors,
 		directors: directors
 	},cb);
+}
+
+module.exports.getMovieContent = function(id,cb){
+	let movie = this;
+
+	movie.aggregate([
+		{
+			$match: {
+				_id: mongoose.Types.ObjectId(id)
+			}
+		},
+		{
+			$lookup: {
+				from: 'actors',
+				localField: 'actors',
+				foreignField: '_id',
+				as: 'actorsInfo'
+			}
+		},
+		{
+			$lookup: {
+				from: 'directors',
+				localField: 'directors',
+				foreignField: '_id',
+				as: 'directorsInfo'
+			}
+		},
+		{
+			$lookup: {
+				from: 'categories',
+				localField: 'categorieIds',
+				foreignField: '_id',
+				as: 'categorieInfo'
+			}
+		}
+	], cb);
 }
 
 module.exports.getMovies = function(cb){

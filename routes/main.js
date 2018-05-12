@@ -20,9 +20,23 @@ router.get('/',(req,res)=>{
 });
 
 router.get('/movie/:id',(req,res)=>{
-
+	let opt = {
+		page: 'movie'
+	}
 	let id = req.params.id ? req.params.id : null;
-	res.send(id);
+	Categorie.getCategories((err,categories)=>{
+		opt.categories = categories;
+		Movies.getMovieContent(id,(err,data)=>{
+			if(err){
+				console.log(err);
+			} else {
+				opt.data = data;
+				console.log(data);
+				res.render('front/movie',opt);
+			}
+		});
+	});
+
 });
 
 module.exports=router;

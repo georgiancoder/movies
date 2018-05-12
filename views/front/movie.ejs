@@ -1,0 +1,48 @@
+<%- include('./header') %>
+
+<% if(typeof data != "undefined"){ %>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <img src="<%= data[0].poster %>" width="300" alt="">
+      </div>
+      <div class="col-sm-8">
+        <h4><%= data[0].title.ka %></h4>
+        <h5><%= data[0].title.en %></h5>
+        <strong>გამოშვების წელი:</strong> <%= data[0].releaseYear %><br>
+        <strong>ქვეყანა:</strong> <%= data[0].country %><br>
+        <strong>ჟანრი:</strong> <% data[0].categorieInfo.forEach(categorie=>{ %>
+          <a href="categorie/<%= categorie._id %>"><%= categorie.title %></a>,
+        <% }) %><br>
+        <strong>ხანგრძლივობა:</strong> <%= data[0].length %>
+        <div class="row">
+          <div class="col-sm-6">
+            <strong>რეჟისორი:</strong> <% data[0].directorsInfo.forEach(director=>{ %>
+              <a href="/director/<%= director._id %>"><%= director.name %> <%= director.lastName %></a>,
+            <% }) %>
+          </div>
+          <div class="col-sm-6">
+            <strong>ბიუჯეტი:</strong> <%= data[0].budget %><br>
+            <strong>შემოსავალი:</strong> <%= data[0].income %><br>
+          </div>
+        </div>
+        <div>
+          <h4>აღწერა:</h4>
+          <%- data[0].description %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <% data[0].actorsInfo.forEach(actor=>{ %>
+        <div class="col-lg-2">
+          <img src="<%= actor.avatar %>" alt="" style="width: 150px; height: 150px; object-fit: cover;">
+          <a href="/actors/<%= actor._id %>"><%= actor.name %> <%= actor.lastName %></a>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+
+<% } %>
+
+<%- include('./footer') %>

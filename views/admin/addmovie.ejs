@@ -264,7 +264,7 @@
 								<% for(var i=0; i<categories.length; i++) {%>
 									<option value="<%= categories[i]._id %>"
 									<% for(var j=0; j<movie.categorieIds.length; j++) { %>
-										<% if(categories[i]._id == movie.categorieIds[j]){ %>
+										<% if(categories[i]._id == `${movie.categorieIds[j]}`){ %>
 											selected
 										<% } %>
 									<% } %>
@@ -281,7 +281,7 @@
 									 <option value="<%= actors[i]._id %>"
 
 									 <% for(var j=0; j<movie.actors.length; j++) { %>
-										<% if(actors[i]._id == movie.actors[j]){ %>
+										<% if(actors[i]._id == `${movie.actors[j]}`){ %>
 											selected
 										<% } %>
 									<% } %>
@@ -299,7 +299,7 @@
 									 <option value="<%= directors[i]._id %>"
 
 									 <% for(var j=0; j<movie.directors.length; j++) { %>
-										<% if(directors[i]._id == movie.directors[j]){ %>
+										<% if(directors[i]._id == `${movie.directors[j]}`){ %>
 											selected
 										<% } %>
 									<% } %>

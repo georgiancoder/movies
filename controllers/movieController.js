@@ -170,6 +170,12 @@ class MovieController {
       })
     }
 
+    getMovieContent(id,cb){
+      if(id){
+        movie.getMovieContent(id,cb);
+      }
+    }
+
 }
 
 module.exports = new MovieController();
