@@ -16,7 +16,13 @@ router.get('/',(req,res)=>{
 			res.render('front/homepage',opt);
 		});
 	});
-	
+
+});
+
+router.get('/movie/:id',(req,res)=>{
+
+	let id = req.params.id ? req.params.id : null;
+	res.send(id);
 });
 
 module.exports=router;
