@@ -48,3 +48,23 @@ module.exports.removeActor = function(id,cb){
 	let actor = this;
   actor.findByIdAndRemove(id,cb);
 }
+
+module.exports.getActorPageData = function(id,cb){
+	let actor = this;
+
+	actor.aggregate([
+    {
+      $match: {
+        _id: mongoose.Types.ObjectId(id)
+      },
+    },
+      {
+        $lookup: {
+          from: 'movies',
+          localField: '_id',
+          foreignField: 'actors',
+          as: 'movies'
+        }
+      }
+  ],cb);
+}

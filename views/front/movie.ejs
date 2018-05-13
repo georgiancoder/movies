@@ -13,7 +13,7 @@
         <strong>გამოშვების წელი:</strong> <%= data[0].releaseYear %><br>
         <strong>ქვეყანა:</strong> <%= data[0].country %><br>
         <strong>ჟანრი:</strong> <% data[0].categorieInfo.forEach(categorie=>{ %>
-          <a href="categorie/<%= categorie._id %>"><%= categorie.title %></a>,
+          <a href="/categories/<%= categorie._id %>"><%= categorie.title %></a>,
         <% }) %><br>
         <strong>ხანგრძლივობა:</strong> <%= data[0].length %>
         <div class="row">

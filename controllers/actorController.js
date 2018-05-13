@@ -144,6 +144,12 @@ class ActorController {
     }
   }
 
+  getActorPageData(id,cb){
+    if(id){
+      actors.getActorPageData(id,cb);
+    }
+  }
+
 }
 
 module.exports = ActorController;

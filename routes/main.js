@@ -3,9 +3,11 @@ const router = express.Router();
 const categorie = require('../controllers/categorieController');
 const Movies = require('../controllers/movieController');
 const directors = require('../controllers/directorsController');
+const actors = require('../controllers/actorController');
 
 const Categorie = new categorie();
 const Director = new directors();
+const Actor = new actors();
 
 router.get('/',(req,res)=>{
 	let opt = {
@@ -71,6 +73,24 @@ router.get('/director/:id',(req,res)=>{
 			} else {
 				opt.data = data;
 				res.render('front/director',opt);
+			}
+		});
+	});
+});
+
+router.get('/actors/:id',(req,res)=>{
+	let opt = {
+		page: 'actor'
+	}
+	let id = req.params.id ? req.params.id : null;
+	Categorie.getCategories((err,categories)=>{
+		opt.categories = categories;
+		Actor.getActorPageData(id,(err,data)=>{
+			if(err){
+				console.log(err);
+			} else {
+				opt.data = data;
+				res.render('front/actor',opt);
 			}
 		});
 	});
