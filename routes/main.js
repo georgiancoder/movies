@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 const categorie = require('../controllers/categorieController');
 const Movies = require('../controllers/movieController');
+const directors = require('../controllers/directorsController');
 
 const Categorie = new categorie();
+const Director = new directors();
 
 router.get('/',(req,res)=>{
 	let opt = {
@@ -31,7 +33,6 @@ router.get('/movie/:id',(req,res)=>{
 				console.log(err);
 			} else {
 				opt.data = data;
-				console.log(data);
 				res.render('front/movie',opt);
 			}
 		});
@@ -51,8 +52,25 @@ router.get('/categories/:id',(req,res)=>{
 				console.log(err);
 			} else {
 				opt.movies = data;
-				console.log(data);
 				res.render('front/categorie',opt);
+			}
+		});
+	});
+});
+
+router.get('/director/:id',(req,res)=>{
+	let opt = {
+		page: 'director'
+	}
+	let id = req.params.id ? req.params.id : null;
+	Categorie.getCategories((err,categories)=>{
+		opt.categories = categories;
+		Director.getDirectorPageData(id,(err,data)=>{
+			if(err){
+				console.log(err);
+			} else {
+				opt.data = data;
+				res.render('front/director',opt);
 			}
 		});
 	});

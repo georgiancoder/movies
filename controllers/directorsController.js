@@ -4,7 +4,6 @@ const { check, validationResult } = require('express-validator/check');
 const path = require('path');
 const fs = require('fs');
 
-
 class directorsController {
     addDirector(req, res) {
         this.uploadAvatar(req,res,(err)=>{
@@ -103,6 +102,12 @@ class directorsController {
         cb(err);
       });
 
+    }
+
+    getDirectorPageData(id,cb){
+      if(id){
+        directors.getDirectorPageData(id,cb);
+      }
     }
 
     getDirectors(cb){

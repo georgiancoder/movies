@@ -50,3 +50,22 @@ module.exports.removeDirector = function(id,cb){
   let director = this;
   director.findByIdAndRemove(id,cb);
 }
+
+module.exports.getDirectorPageData = function(id,cb){
+  let director = this;
+  director.aggregate([
+    {
+      $match: {
+        _id: mongoose.Types.ObjectId(id)
+      },
+    },
+      {
+        $lookup: {
+          from: 'movies',
+          localField: '_id',
+          foreignField: 'directors',
+          as: 'movies'
+        }
+      }
+  ],cb);
+}
