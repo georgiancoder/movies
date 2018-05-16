@@ -6,7 +6,9 @@ const bcrypt = require('bcrypt-nodejs');
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
+  	console.log('aq rato ar shemodis');
   	Users.checkUser(username,(err,user)=>{
+
   		if(err) {
   			return done(err);
   		}
@@ -68,7 +70,7 @@ class User {
 	login(req,res,next){
 		passport.authenticate('local', (err,user,info)=>{
 			if (err) { return next(err); }
-		      if (!user) { return res.redirect('/'); }
+		      if (!user) { return res.redirect('/regauth'); }
 		      req.logIn(user, function(err) {
 		        if (err) { return next(err); }
 		        return res.redirect('/');
@@ -86,7 +88,7 @@ class User {
 
 	logOut(req,res){
 		req.logout();
-		res.redirect('/admin');
+		res.redirect('/regauth');
 	}
 }
 

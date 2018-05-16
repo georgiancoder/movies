@@ -114,4 +114,6 @@ router.get('/regauth',(req,res)=>{
 
 router.post('/reg',Users.register);
 
+router.post('/login',Users.login);
+
 module.exports=router;
