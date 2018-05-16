@@ -4,10 +4,12 @@ const categorie = require('../controllers/categorieController');
 const Movies = require('../controllers/movieController');
 const directors = require('../controllers/directorsController');
 const actors = require('../controllers/actorController');
+const user = require('../controllers/usersController');
 
 const Categorie = new categorie();
 const Director = new directors();
 const Actor = new actors();
+const Users = new user();
 
 router.get('/',(req,res)=>{
 	let opt = {
@@ -105,5 +107,11 @@ router.get('/regauth',(req,res)=>{
 		res.render('front/regauth',opt);
 	});
 });
+
+
+
+//post requests
+
+router.post('/reg',Users.register);
 
 module.exports=router;
